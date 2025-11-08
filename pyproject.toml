@@ -1,0 +1,104 @@
+[project]
+name = "diagrams-mcp"
+version = "1.0.0"
+description = "High-quality MCP server for generating infrastructure and architecture diagrams as code using the Python diagrams library"
+license = "MIT"
+keywords = [
+    "mcp",
+    "diagrams",
+    "architecture",
+    "infrastructure",
+    "cloud",
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes",
+    "devops",
+    "graphviz",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+]
+readme = "README.md"
+authors = [
+    { name = "Akshay Petta", email = "33671231+apetta@users.noreply.github.com" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp~=2.13.0",
+    "diagrams~=0.24.4",
+    "pydantic~=2.12.3",
+    "pillow>=10.0.0",
+    "requests>=2.31.0",
+    "aiofiles>=23.2.0",
+]
+
+[project.scripts]
+diagrams-mcp = "diagrams_mcp.server:main"
+diagrams-mcp-http = "diagrams_mcp.http_server:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests_diagrams"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "-ra",
+    "--cov=diagrams_mcp",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.coverage.run]
+source = ["src/diagrams_mcp"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+
+[tool.poe.tasks]
+test = "pytest -n auto"
+lint = "ruff check src/diagrams_mcp"
+format = "ruff format src/diagrams_mcp"
+check = ["lint", "test"]
+clean = { shell = "rm -rf .coverage htmlcov .pytest_cache **/__pycache__" }
+
+[dependency-groups]
+dev = [
+    "pytest~=8.4.2",
+    "pytest-asyncio~=1.1.0",
+    "pytest-cov~=7.0.0",
+    "pytest-xdist~=3.8.0",
+    "poethepoet~=0.37.0",
+    "ruff~=0.14.2",
+]

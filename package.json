@@ -1,0 +1,25 @@
+{
+  "name": "diagrams-mcp",
+  "version": "1.0.0",
+  "description": "High-quality MCP server for generating infrastructure and architecture diagrams using Python diagrams library",
+  "license": "MIT",
+  "author": "Akshay Petta",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akshaypetta/diagrams-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "diagrams",
+    "infrastructure",
+    "architecture",
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes",
+    "graphviz",
+    "python",
+    "visualization"
+  ]
+}
