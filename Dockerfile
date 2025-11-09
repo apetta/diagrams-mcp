@@ -18,19 +18,18 @@ ENV UV_COMPILE_BYTECODE=1
 # Copy from cache instead of linking (required for Docker volumes)
 ENV UV_LINK_MODE=copy
 
-# Copy pyproject file for diagrams-mcp
-COPY pyproject_diagrams.toml pyproject.toml
-
-# Install project dependencies
+# Install project dependencies using lockfile
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --no-install-project --no-dev
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --no-dev
 
 # Copy application code
-COPY src/diagrams_mcp /app/src/diagrams_mcp
+COPY . /app
 
 # Install the application itself
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --no-dev
+    uv sync --locked --no-dev
 
 # Add virtual environment to PATH
 ENV PATH="/app/.venv/bin:$PATH"
