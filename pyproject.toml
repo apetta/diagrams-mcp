@@ -1,7 +1,7 @@
 [project]
 name = "diagrams-mcp"
 version = "1.0.0"
-description = "High-quality MCP server for generating infrastructure and architecture diagrams as code using the Python diagrams library"
+description = "MCP server for generating infrastructure and architecture diagrams as code using the Python diagrams library"
 license = "MIT"
 keywords = [
     "mcp",

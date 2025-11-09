@@ -1,4 +1,4 @@
-"""Diagrams MCP - High-quality server for generating infrastructure diagrams as code."""
+"""Diagrams MCP - generate infrastructure diagrams as code."""
 
 from fastmcp import FastMCP
 
@@ -24,8 +24,7 @@ mcp = FastMCP(
 • Infrastructure architecture diagrams
 • System design documentation
 • Cloud resource visualisation
-• Flowcharts and process diagrams
-• Architecture as code in version control"""
+• Flowcharts and process diagrams""",
 )
 
 
