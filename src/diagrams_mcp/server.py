@@ -302,6 +302,102 @@ See docs://custom-icons for custom icon guide ⭐
 """
 
 
+# ============================================================================
+# MCP Prompts - Interactive Workflows
+# ============================================================================
+
+
+@mcp.prompt(
+    name="create-aws-diagram", description="Guide me through creating an AWS infrastructure diagram"
+)
+def prompt_aws_diagram() -> str:
+    """Interactive prompt for creating AWS diagrams."""
+    return """I'll help you create an AWS infrastructure diagram. Let's build a common 3-tier web application architecture.
+
+**Recommended Components:**
+- **Frontend**: Route53 (DNS) → CloudFront (CDN) → ALB (Load Balancer)
+- **Application**: EC2 instances or ECS/EKS containers
+- **Database**: RDS, DynamoDB, or Aurora
+- **Storage**: S3 buckets
+- **Security**: VPC, Security Groups, WAF
+
+**Step 1**: Tell me about your architecture:
+- What type of application are you building?
+- Which AWS services do you want to include?
+- Do you need VPC grouping/clustering?
+
+**Example Response**:
+"I want to diagram a serverless web app with API Gateway, Lambda functions, DynamoDB, and S3 for static assets."
+
+**Step 2**: I'll use `list_available_nodes` to find the correct node types for your services.
+
+**Step 3**: I'll use `create_diagram` to generate your AWS architecture diagram with proper connections and styling.
+
+What would you like to diagram?"""
+
+
+@mcp.prompt(
+    name="create-k8s-diagram",
+    description="Guide me through creating a Kubernetes deployment diagram",
+)
+def prompt_k8s_diagram() -> str:
+    """Interactive prompt for creating Kubernetes diagrams."""
+    return """I'll help you create a Kubernetes deployment diagram. Let's visualise your K8s architecture.
+
+**Common K8s Components:**
+- **Ingress**: Ingress controllers for external access
+- **Services**: ClusterIP, LoadBalancer, NodePort
+- **Workloads**: Deployments, StatefulSets, DaemonSets, Pods
+- **Storage**: PersistentVolumes, PersistentVolumeClaims
+- **Config**: ConfigMaps, Secrets
+- **Networking**: NetworkPolicy, Service mesh
+
+**Step 1**: Describe your Kubernetes setup:
+- How many microservices/applications?
+- Do you use Ingress for routing?
+- What type of storage (if any)?
+- Do you need to show ConfigMaps/Secrets?
+
+**Example Response**:
+"I have 2 microservices behind an Ingress controller. Service A talks to a PostgreSQL StatefulSet with persistent storage. Service B is a stateless API."
+
+**Step 2**: I'll discover available K8s node types with `list_available_nodes`.
+
+**Step 3**: I'll generate your K8s diagram showing the complete deployment topology.
+
+What's your Kubernetes architecture?"""
+
+
+@mcp.prompt(name="create-flowchart", description="Guide me through creating a process flowchart")
+def prompt_flowchart() -> str:
+    """Interactive prompt for creating flowcharts."""
+    return """I'll help you create a process flowchart. Flowcharts are perfect for documenting workflows, algorithms, and decision trees.
+
+**Available Flowchart Shapes:**
+- **StartEnd**: Oval for start/end points
+- **Process**: Rectangle for actions/operations
+- **Decision**: Diamond for yes/no branches
+- **Data**: Parallelogram for input/output
+- **Database**: Cylinder for data storage
+- **Document**: For document-related steps
+- **Delay**: For waiting/timing steps
+
+**Step 1**: Describe your process:
+- What workflow are you documenting?
+- What are the main steps?
+- Are there decision points (if/else)?
+- Does it involve data storage or external systems?
+
+**Example Response**:
+"I want to flowchart our deployment process: code commit → build → run tests → if tests pass, deploy to production, else notify team and retry."
+
+**Step 2**: I'll map your process to flowchart shapes.
+
+**Step 3**: I'll use `create_flowchart` to generate your process diagram.
+
+What process would you like to flowchart?"""
+
+
 # Import and register all tools (must be after mcp instance creation for decorators)
 from .tools import core  # noqa: E402
 

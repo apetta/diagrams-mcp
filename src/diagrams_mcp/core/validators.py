@@ -59,9 +59,7 @@ class CustomNodeDef(BaseModel):
         description="Display label",
         min_length=1,
     )
-    icon_source: Literal["url", "local"] = Field(
-        description="Icon from web URL or local file"
-    )
+    icon_source: Literal["url", "local"] = Field(description="Icon from web URL or local file")
     icon_path: str = Field(
         description="HTTPS URL or local file path",
         min_length=1,

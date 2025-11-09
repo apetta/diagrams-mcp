@@ -134,6 +134,11 @@ Clusters: clusters=[{"name":"VPC","node_ids":["elb","ec2"],"graph_attr":{"bgcolo
 ⚠️ CRITICAL: Node types must exist in diagrams library or diagram fails silently (no arrows).
 ALWAYS verify first: list_available_nodes(provider="aws", category="compute")
 For brands (Stripe, Vercel), use create_diagram_with_custom_icons instead.""",
+    annotations={
+        "readOnlyHint": False,
+        "destructiveHint": False,
+        "idempotentHint": True,
+    },
 )
 async def create_diagram(
     name: Annotated[str, Field(description="Diagram title")],
@@ -156,7 +161,12 @@ async def create_diagram(
         str | List[str],
         Field(description="Output format(s): png, pdf, jpg, dot"),
     ] = "png",
-    output_dir: Annotated[Optional[str], Field(description="Output directory (default: current directory). Auto-created if missing.")] = None,
+    output_dir: Annotated[
+        Optional[str],
+        Field(
+            description="Output directory (default: current directory). Auto-created if missing."
+        ),
+    ] = None,
     graph_attr: Annotated[
         Optional[Dict[str, Any]], Field(description="Graphviz graph attributes")
     ] = None,
@@ -209,7 +219,7 @@ async def create_diagram(
         formats = [output_format] if isinstance(output_format, str) else output_format
 
         # Reject SVG - it's buggy and unsupported
-        if any('svg' in fmt.lower() for fmt in formats):
+        if any("svg" in fmt.lower() for fmt in formats):
             raise ValueError("SVG output is not supported. Use png, pdf, jpg, or dot instead.")
 
         # Change to output directory if specified
@@ -367,6 +377,11 @@ URL: custom_nodes=[{"id":"stripe","icon_source":"url","icon_path":"https://avata
 Mixed: nodes=[{...AWS nodes...}], custom_nodes=[{...}], connections=[...]
 
 HTTPS-only for URLs, 5MB limit, PNG/JPG supported. Automatic caching.""",
+    annotations={
+        "readOnlyHint": False,
+        "destructiveHint": False,
+        "idempotentHint": True,
+    },
 )
 async def create_diagram_with_custom_icons(
     name: Annotated[str, Field(description="Diagram title")],
@@ -383,8 +398,15 @@ async def create_diagram_with_custom_icons(
         Literal["LR", "RL", "TB", "BT"], Field(description="Layout direction")
     ] = "LR",
     curvestyle: Annotated[Literal["ortho", "curved"], Field(description="Edge style")] = "ortho",
-    output_format: Annotated[str | List[str], Field(description="Output format(s): png, pdf, jpg, dot")] = "png",
-    output_dir: Annotated[Optional[str], Field(description="Output directory (default: current directory). Auto-created if missing.")] = None,
+    output_format: Annotated[
+        str | List[str], Field(description="Output format(s): png, pdf, jpg, dot")
+    ] = "png",
+    output_dir: Annotated[
+        Optional[str],
+        Field(
+            description="Output directory (default: current directory). Auto-created if missing."
+        ),
+    ] = None,
     graph_attr: Annotated[Optional[Dict[str, Any]], Field(description="Graph attributes")] = None,
     return_base64: Annotated[bool, Field(description="Return base64 images")] = False,
 ) -> str:
@@ -432,7 +454,7 @@ async def create_diagram_with_custom_icons(
         formats = [output_format] if isinstance(output_format, str) else output_format
 
         # Reject SVG - it's buggy and unsupported
-        if any('svg' in fmt.lower() for fmt in formats):
+        if any("svg" in fmt.lower() for fmt in formats):
             raise ValueError("SVG output is not supported. Use png, pdf, jpg, or dot instead.")
 
         # Change directory if needed
@@ -559,6 +581,11 @@ Filters: provider, category, search_term
 Examples:
 AWS compute: provider="aws", category="compute" → EC2, Lambda, ECS, EKS...
 Search DBs: search_term="db" → RDS, DynamoDB, SQL across providers""",
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+    },
 )
 async def list_available_nodes(
     provider: Annotated[
@@ -604,6 +631,11 @@ async def list_available_nodes(
 Example:
 steps=[{"id":"start","shape":"StartEnd","label":"Start"},...]
 flows=[{"from_step":"start","to_step":"check"},...]""",
+    annotations={
+        "readOnlyHint": False,
+        "destructiveHint": False,
+        "idempotentHint": True,
+    },
 )
 async def create_flowchart(
     name: Annotated[str, Field(description="Flowchart title")],
@@ -612,10 +644,18 @@ async def create_flowchart(
     direction: Annotated[
         Literal["LR", "RL", "TB", "BT"], Field(description="Layout direction")
     ] = "TB",
-    output_format: Annotated[str | List[str], Field(description="Output format(s): png, pdf, jpg, dot")] = "png",
-    output_dir: Annotated[Optional[str], Field(description="Output directory (default: current directory). Auto-created if missing.")] = None,
+    output_format: Annotated[
+        str | List[str], Field(description="Output format(s): png, pdf, jpg, dot")
+    ] = "png",
+    output_dir: Annotated[
+        Optional[str],
+        Field(
+            description="Output directory (default: current directory). Auto-created if missing."
+        ),
+    ] = None,
     graph_attr: Annotated[
-        Optional[Dict[str, Any]], Field(description="Graphviz graph attributes (overrides defaults)")
+        Optional[Dict[str, Any]],
+        Field(description="Graphviz graph attributes (overrides defaults)"),
     ] = None,
     return_base64: Annotated[bool, Field(description="Return base64 images")] = False,
 ) -> str:
@@ -704,7 +744,7 @@ async def create_flowchart(
         formats = [output_format] if isinstance(output_format, str) else output_format
 
         # Reject SVG - it's buggy and unsupported
-        if any('svg' in fmt.lower() for fmt in formats):
+        if any("svg" in fmt.lower() for fmt in formats):
             raise ValueError("SVG output is not supported. Use png, pdf, jpg, or dot instead.")
 
         original_dir = os.getcwd()
@@ -716,9 +756,9 @@ async def create_flowchart(
             # Hide diagram title and set better flowchart layout attributes
             default_graph_attr = {
                 "label": "",
-                "splines": "ortho",      # Orthogonal edges with 90-degree angles
-                "nodesep": "0.8",        # Horizontal spacing between nodes (inches)
-                "ranksep": "0.75",       # Vertical spacing between ranks (inches)
+                "splines": "ortho",  # Orthogonal edges with 90-degree angles
+                "nodesep": "0.8",  # Horizontal spacing between nodes (inches)
+                "ranksep": "0.75",  # Vertical spacing between ranks (inches)
             }
             merged_graph_attr = {**default_graph_attr, **(graph_attr or {})}
 
@@ -805,6 +845,11 @@ async def create_flowchart(
 
 Checks: node validity, connection references, cluster memberships.
 Returns: {"valid": true/false, "errors": [...], "warnings": [...]}""",
+    annotations={
+        "readOnlyHint": True,
+        "destructiveHint": False,
+        "idempotentHint": True,
+    },
 )
 async def validate_diagram_spec(
     nodes: Annotated[List[NodeDef], Field(description="Nodes to validate")],

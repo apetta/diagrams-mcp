@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Background -->
+  <rect width="256" height="256" fill="#1e3a8a" rx="24"/>
+
+  <!-- Central node (larger) -->
+  <rect x="108" y="108" width="40" height="40" fill="#60a5fa" rx="4"/>
+
+  <!-- Top left node -->
+  <circle cx="70" cy="70" r="16" fill="#93c5fd"/>
+
+  <!-- Top right node -->
+  <circle cx="186" cy="70" r="16" fill="#93c5fd"/>
+
+  <!-- Bottom left node -->
+  <rect x="54" y="170" width="32" height="32" fill="#93c5fd" rx="4"/>
+
+  <!-- Bottom right node -->
+  <rect x="170" y="170" width="32" height="32" fill="#93c5fd" rx="4"/>
+
+  <!-- Connection lines -->
+  <!-- Top left to center -->
+  <line x1="82" y1="82" x2="112" y2="112" stroke="#dbeafe" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Top right to center -->
+  <line x1="174" y1="82" x2="144" y2="112" stroke="#dbeafe" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Center to bottom left -->
+  <line x1="112" y1="144" x2="82" y2="174" stroke="#dbeafe" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Center to bottom right -->
+  <line x1="144" y1="144" x2="174" y2="174" stroke="#dbeafe" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Decorative accent - small dots for tech feel -->
+  <circle cx="128" cy="40" r="3" fill="#60a5fa" opacity="0.6"/>
+  <circle cx="40" cy="128" r="3" fill="#60a5fa" opacity="0.6"/>
+  <circle cx="216" cy="128" r="3" fill="#60a5fa" opacity="0.6"/>
+  <circle cx="128" cy="216" r="3" fill="#60a5fa" opacity="0.6"/>
+</svg>
