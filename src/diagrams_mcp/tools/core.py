@@ -234,7 +234,7 @@ async def create_diagram(
                 graph_attr=merged_graph_attr,
                 node_attr=node_attr or {},
                 edge_attr=edge_attr or {},
-            ) as _diag:
+            ) as _:
                 # Create all nodes
                 node_objects = {}
                 for node in nodes:
@@ -453,7 +453,7 @@ async def create_diagram_with_custom_icons(
                 curvestyle=curvestyle,
                 outformat=formats,
                 graph_attr=merged_graph_attr,
-            ) as _diag:
+            ) as _:
                 # Create all nodes
                 node_objects = {}
 
@@ -728,7 +728,7 @@ async def create_flowchart(
                 direction=direction,
                 outformat=formats,
                 graph_attr=merged_graph_attr,
-            ) as _diag:
+            ) as _:
                 # Create step objects
                 step_objects = {}
                 for step in steps:
