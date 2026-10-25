@@ -4,7 +4,7 @@ MCP server for generating infrastructure and architecture diagrams as code using
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Smithery](https://smithery.ai/badge/@apetta/diagrams-mcp)](https://smithery.ai/server/@apetta/diagrams-mcp)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.apetta/diagrams-mcp)](https://lightnow.ai/servers/io.github.apetta/diagrams-mcp)
 
 ## Features
 
